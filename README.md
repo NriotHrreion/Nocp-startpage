@@ -1,6 +1,11 @@
 # Nocp startpage
 更简洁的Chrome新标签页
 
+## 下载
+下载途径：
+- [国内下载](https://tool.misakal.xyz/crx/startpage.crx)
+- [海外下载](https://github.com/NriotHrreion/tools/releases)
+
 ## 使用
 下载后**解压**导入至Chrome即可
 <br>
