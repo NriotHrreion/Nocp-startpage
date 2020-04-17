@@ -13,7 +13,9 @@
 
 如果你需要切换背景图片，那你可以手动进入image文件夹，手动将bg.jpg改为你要的背景图
 <br>
-或者你可以点击插件图标启用“使用Bing今日美图做背景图”
+或者你可以点击插件图标启用“使用Bing今日美图做背景图”，效果如下:
+<br>
+![page.png](https://raw.githubusercontent.com/NriotHrreion/Nocp-startpage/master/image/page.png)
 
 ## 功能
 除了新标签页以外，Nocp Startpage还提供了更方便的搜索功能
