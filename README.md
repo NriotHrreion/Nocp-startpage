@@ -15,6 +15,7 @@
 <br>
 或者你可以点击插件图标启用“使用Bing今日美图做背景图”，效果如下:
 <br>
+<br>
 ![page.png](https://raw.githubusercontent.com/NriotHrreion/Nocp-startpage/master/image/page.png)
 
 ## 功能
