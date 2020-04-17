@@ -1,0 +1,83 @@
+@middlevar: {
+    vertical-align: middle;
+}
+body {
+	background-size: 100% auto;
+	background-repeat: no-repeat;
+}
+.searchbox {
+    background-color: #fff;
+	border-radius: 2em;
+	width: 552px;
+	height: 42px;
+	position: absolute;
+	top: 450px;
+	left: 495px;
+	.mg {
+		height: 25px;
+		margin-left: 15px;
+		margin-top: 1px;
+		@middlevar();
+	}
+	.search {
+		width: 440px;
+		height: 40px;
+		border: none;
+		outline: none;
+		font-size: 16px;
+		color: #707070;
+		margin-left: 10px;
+		font-family: 'Segoe UI', Roboto, arial, sans-serif;
+		@middlevar();
+	}
+}
+.more {
+    position: absolute;
+	bottom: 0;
+	right: 0;
+	cursor: pointer;
+	margin: 23px;
+	&:hover {
+		opacity: 76%;
+	}
+	&:active {
+		opacity: 69%;
+	}
+}
+.account {
+    position: absolute;
+	bottom: 0;
+	right: 53px;
+	cursor: pointer;
+	margin: 19px;
+	&:hover {
+		opacity: 76%;
+	}
+	&:active {
+		opacity: 69%;
+	}
+}
+.more-item {
+    vertical-align: middle;
+	position: absolute;
+	right: 23px;
+	bottom: 92px;
+	overflow: hidden;
+	width: 310px;
+	height: 400px;
+	background-color: #fff;
+	border-radius: 7px;
+  display: none;
+    #m-tit {
+        text-decoration: none;
+	    color: #757575;
+	    font-size: 13pt;
+	    font-weight: 700;
+	    margin: 20px 35px;
+	}
+	.applications a img {
+		width: 40px;
+		height: 40px;
+		margin: 30px;
+	}
+}
