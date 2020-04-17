@@ -1,0 +1,53 @@
+.center(@type) when (@type = 1) {
+    text-align: center;
+}
+.center(@type) when (@type = 2) {
+    margin-left: auto;
+    margin-right: auto;
+}
+body {
+    width: 260px;
+    height: 105px;
+}
+.title, .description {
+    .center(1);
+}
+.io {
+    width: 75px;
+    height: 17px;
+    border: 1px solid #9e9e9e;
+    border-radius: 3px;
+    margin-left: 20px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    .on {
+        width: 45%;
+        height: 100%;
+        background-color: rgb(23, 151, 55);
+        float: left;
+        &:hover {
+            background-color: rgb(19, 104, 40);
+        }
+    }
+    .off {
+        width: 45%;
+        height: 100%;
+        background-color: rgb(97, 96, 96);
+        float: right;
+        &:hover {
+            background-color: rgb(71, 70, 70);
+        }
+    }
+}
+.option {
+    color: rgb(105, 104, 104);
+    font-size: 9pt;
+    margin-left: 14px;
+}
+.copy {
+    font-size: 9pt;
+    color: rgb(117, 117, 117);
+    text-align: center;
+    margin-bottom: 10px;
+}
