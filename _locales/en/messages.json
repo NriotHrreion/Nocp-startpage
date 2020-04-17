@@ -1,0 +1,15 @@
+{
+    "name": {"message": "Nocp Startpage"},
+    "description": {"message": "More concise startpage"},
+    "tab": {"message": "New tab"},
+    "searchbox": {"message": "Search Baidu, or type a url"},
+    "cantset": {"message": "You can't change this switch."},
+    "more": {"message": "More App"},
+    "title_1": {"message": "Baidu"},
+    "title_2": {"message": "Google Account"},
+    "title_3": {"message": "More"},
+    "context_1": {"message": "Open a new tab"},
+    "context_2": {"message": "Search: %s"},
+    "opt_1": {"message": "Use Bing Today Photo as bgimage"},
+    "info_1": {"message": "Please reload the page for the settings to take effect."}
+}
