@@ -25,14 +25,3 @@
 
 [Apache 2.0](./LICENSE)
 
-```json
-{
-    "map": {
-        "blocks": {
-            "wall": [],
-            "lava": [],
-            "water": []
-        }
-    }
-}
-```
