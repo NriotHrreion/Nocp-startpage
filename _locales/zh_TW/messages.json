@@ -1,0 +1,16 @@
+{
+    "name": {"message": "Nocp Startpage"},
+    "description": {"message": "更簡潔的Chrome新標籤頁"},
+    "tab": {"message": "新標籤頁"},
+    "searchbox": {"message": "在Google上搜尋，或鍵入網址"},
+    "cantset": {"message": "你不能控制這個開關"},
+    "more": {"message": "更多應用"},
+    "title_1": {"message": "Google搜尋"},
+    "title_2": {"message": "Google 賬號"},
+    "title_3": {"message": "更多"},
+    "context_1": {"message": "打開新的標籤頁"},
+    "context_2": {"message": "搜尋: %s"},
+    "opt_1": {"message": "使用Bing今日美圖做背景圖"},
+    "opt_2": {"message": "圖片輪播"},
+    "info_1": {"message": "請刷新以使設定生效"}
+}

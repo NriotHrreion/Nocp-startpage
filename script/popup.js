@@ -1,0 +1,48 @@
+/**
+ * Locale
+ */
+document.getElementById("description").innerHTML = chrome.i18n.getMessage("description");
+document.getElementById("opt_1").innerHTML = chrome.i18n.getMessage("opt_1");
+
+
+var on1 = document.getElementById("on_1");
+var off1 = document.getElementById("off_1");
+
+chrome.storage.local.get({bgimg: true}, function(data) {
+    if(data.bgimg == true) {
+        on1.style.display = "block";
+        off1.style.display = "none";
+    } else if(data.bgimg == false) {
+        on1.style.display = "none";
+        off1.style.display = "block";
+    }
+});
+
+on1.onclick = function() {
+    on1.style.display = "none";
+    off1.style.display = "block";
+    chrome.storage.local.set({bgimg: false});
+    chrome.notifications.create({
+        type: "basic",
+        iconUrl: "../icon.png",
+        title: "Info",
+        message: chrome.i18n.getMessage("info_1")
+    });
+    location.href = "chrome://newtab";
+}
+off1.onclick = function() {
+    on1.style.display = "block";
+    off1.style.display = "none";
+    chrome.storage.local.set({bgimg: true});
+    chrome.notifications.create({
+        type: "basic",
+        iconUrl: "../icon.png",
+        title: "Info",
+        message: chrome.i18n.getMessage("info_1")
+    });
+    location.href = "chrome://newtab";
+}
+
+new CustomEvent("startpage-by-nriothrreion", {});
+document.addEventListener("startpage-by-nriothrreion", function() {});
+

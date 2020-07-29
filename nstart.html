@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Content-Security-Policy" content="default-src *; child-src *; img-src 'self' data: base64 https://*.misakal.xyz/ https://*.bing.com/ https://assets.msn.com/; style-src 'self' 'unsafe-inline' data: base64; script-src 'self' 'unsafe-inline' 'unsafe-eval';">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="NriotHrreion">
+    <meta name="application-name" content="Nocp Startpage">
+    <meta name="easter" content="./wow.txt">
+    <script type="text/javascript" src="lib/console.js"></script>
+    <script type="text/javascript" src="lib/preload.js"></script>
+    <link rel="prefetch" href="./image/bg.jpg" as="image">
+    <link rel="stylesheet/less" type="text/css" href="css/page.less">
+    <script type="text/javascript" src="lib/less-config.js"></script>
+    <script type="text/javascript" src="lib/less.min.js"></script>
+    <script type="text/javascript" src="lib/style.js" id="stylejs" data-style="page"></script>
+    <script type="text/javascript" src="lib/annyang.min.js"></script>
+</head>
+<body>
+    <!-- background -->
+    <div class="background"></div>
+    <div class="morebox">
+        <!-- more -->
+        <a href="http://gmail.com" class="more-gmail">Gmail</a>
+        <a href="http://google.com/imghp" class="more-picture">Pictures</a>
+        <a href="https://myaccount.google.com"><img src="image/account.png" width="35px" height="35px" id="account" class="account"></a>
+        <img src="image/more.png" width="30px" height="30px" id="more" class="more">
+        <!-- links -->
+        <div class="more-item" id="more-item">
+            <p id="m-tit"></p>
+            <div class="applications" aria-hidden="true">
+                <a href="https://youtube.com" title="Youtube"><img src="image/google/youtube.png"></a>
+                <a href="https://twitter.com" title="Twitter"><img src="image/google/twitter.png"></a>
+                <a href="https://facebook.com" title="Facebook"><img src="image/google/facebook.png"></a>
+                <a href="https://instagram.com" title="Instagram"><img src="image/google/ins.png"></a>
+                <a href="https://google.com" title="Google Search"><img src="image/google/googlesearch.png"></a>
+                <a href="https://blogger.com" title="Blogger"><img src="image/google/blogger.png"></a>
+                <a href="https://translate.google.com" title="Google Translate"><img src="image/google/translate.png"></a>
+                <a href="https://github.com" title="Github"><img src="image/google/github.png"></a>
+                <a href="https://baidu.com" title="Baidu"><img src="image/google/baidu.png"></a>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="google-logo" id="lb" title="Google" aria-hidden="true"></div>
+        <div class="searchbox" id="sbox">
+            <!-- search box -->
+            <input type="url" class="search" id="s" autocomplete="off">
+            <!-- voice search button -->
+            <button class="voice" id="voice-s"></button>
+        </div>
+    </div>
+    <script type="text/javascript" src="script/search.js" defer></script>
+</body>
+</html>

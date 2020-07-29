@@ -1,0 +1,16 @@
+{
+    "name": {"message": "Nocp Startpage[Beta]"},
+    "description": {"message": "更简洁的Chrome新标签页"},
+    "tab": {"message": "新标签页"},
+    "searchbox": {"message": "在Google上搜索，或输入网址"},
+    "cantset": {"message": "你不能控制这个开关"},
+    "more": {"message": "更多应用"},
+    "title_1": {"message": "Google搜索"},
+    "title_2": {"message": "Google 账号"},
+    "title_3": {"message": "更多"},
+    "context_1": {"message": "打开新的标签页"},
+    "context_2": {"message": "搜索: %s"},
+    "opt_1": {"message": "使用Bing今日美图做背景图"},
+    "opt_2": {"message": "图片轮播"},
+    "info_1": {"message": "请刷新以使设置生效"}
+}

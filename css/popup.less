@@ -1,0 +1,91 @@
+@charset "UTF-8";
+@import "colors.less";
+@import "font.less";
+
+// functions
+.center(@type) when (@type = "text") {
+    text-align: center;
+}
+.center(@type) when (@type = "div") {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// css
+body {
+    width: 260px;
+    height: 105px;
+}
+.title {
+    font-family: Lato-black;
+}
+.title, .description {
+    .center("text");
+}
+.title::before {
+    content: "";
+    width: 25px;
+	height: 25px;
+	margin-left: 19px;
+	margin-top: 5px;
+	background-image: url(../icon.png);
+	background-size: 100%;
+	display: block;
+	float: left;
+}
+.io {
+    width: 75px;
+    height: 17px;
+    border: 1px solid @io-border-color;
+    border-radius: 3px;
+    margin-left: 20px;
+    color: @color-white;
+    text-align: center;
+    cursor: pointer;
+    .on {
+        width: 45%;
+        height: 100%;
+        font-family: Lato-regular;
+        background-color: @io-on;
+        float: left;
+        &:hover {
+            background-color: @io-on-hover;
+        }
+    }
+    .off {
+        width: 45%;
+        height: 100%;
+        font-family: Lato-regular;
+        background-color: @io-off;
+        float: right;
+        &:hover {
+            background-color: @io-off-hover;
+        }
+    }
+}
+.img_default {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+.upload {
+    width: 80%;
+    height: 50px;
+    border: 1px solid @upload-border-color;
+    border-radius: 3px;
+    .center("div");
+    input {
+        margin: 10px;
+    }
+}
+.option {
+    color: @option-text-color;
+    font-size: 9pt;
+    margin-left: 14px;
+}
+.copy {
+    font-family: Lato-light;
+    font-size: 9pt;
+    color: @copy-text-color;
+    .center("text");
+    margin-bottom: 10px;
+}

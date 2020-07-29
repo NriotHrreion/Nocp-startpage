@@ -1,0 +1,165 @@
+@charset "UTF-8";
+@import "colors.less";
+@import "font.less";
+
+// functions
+@middlevar: {
+    vertical-align: middle;
+}
+.more-buttons(@right, @margin) {
+	position: absolute;
+	bottom: 0;
+	right: @right;
+	cursor: pointer;
+	margin: @margin;
+	&:hover {
+		opacity: 76%;
+	}
+	&:active {
+		opacity: 69%;
+	}
+}
+.more-links(@right) {
+	position: fixed;
+	bottom: 9.5px;
+	right: @right;
+	color: @color-white;
+	margin: 19px;
+	text-decoration: none;
+	outline: none;
+	&:hover {
+		text-decoration: underline;
+		opacity: 90%;
+	}
+}
+
+// css
+body {
+	background-attachment: fixed;
+	margin: 0;
+	* {
+		font-family: 'Segoe UI', Roboto, arial, sans-serif;
+	}
+}
+.background {
+	background-position: center center;
+  	background-repeat: no-repeat;
+	background-size: cover;
+  	height: 100%;
+  	left: 0;
+  	margin: 0;
+  	opacity: 0;
+  	padding: 0;
+  	position: fixed;
+  	top: 0;
+  	transition: opacity 700ms;
+	width: 100%;
+	z-index: -2;
+}
+.content {
+	height: 100%;
+  	left: 0;
+  	margin: 0;
+  	padding: 0;
+  	position: fixed;
+  	top: 0;
+	width: 100%;
+	overflow: auto;
+	z-index: -1;
+	.google-logo {
+		width: 272px;
+		height: 92px;
+		margin: 0 auto;
+		margin-top: 200px;
+		background-color: @logo-color;
+		mask: url(../image/logo.svg) no-repeat 100%;
+		-webkit-mask: url(../image/logo.svg) no-repeat 100%;
+	}
+	.searchbox {
+		background-color: @color-white;
+		border-radius: 2em;
+		width: 552px;
+		height: 42px;
+		margin: 130px auto;
+		box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+		.search {
+			width: 440px;
+			height: 37px;
+			border: none;
+			padding: 3px 0 0 0;
+			outline: none;
+			font-size: 16px;
+			color: @searchbox-text-color;
+			caret-color: @searchbox-caret-color;
+			margin-left: 10px;
+			&::selection {
+				background-color: @searchbox-select-color;
+			}
+			@middlevar();
+		}
+		.voice {
+			width: 22px;
+			height: 22px;
+			margin-right: 19px;
+			margin-top: 10px;
+			border: 0;
+			background-image: url(../image/voice.svg);
+			background-color: @color-tr;
+			float: right;
+			outline: none;
+			cursor: pointer;
+		}
+		&::before {
+			content: "";
+			width: 25px;
+			height: 25px;
+			margin-left: 19px;
+			margin-top: 12px;
+			background-image: url(../image/search.svg);
+			background-size: 100%;
+			display: block;
+			float: left;
+		}
+	}
+}
+.morebox {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	.more {
+		.more-buttons(0, 23px);
+	}
+	.account {
+		.more-buttons(53px, 19px);
+	}
+	.more-gmail {
+		.more-links(105px);
+	}
+	.more-picture {
+		.more-links(150px);
+	}
+	.more-item {
+		vertical-align: middle;
+		position: fixed;
+		right: 23px;
+		bottom: 92px;
+		overflow: hidden;
+		width: 310px;
+		height: 400px;
+		background-color: @color-white;
+		border-radius: 7px;
+		  display: none;
+		#m-tit {
+			text-decoration: none;
+			color: @more-title-color;
+			font-size: 13pt;
+			font-weight: 700;
+			margin: 20px 35px;
+		}
+		.applications a img {
+			width: 40px;
+			height: 40px;
+			margin: 30px;
+		}
+	}
+}

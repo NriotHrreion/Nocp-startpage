@@ -1,0 +1,5 @@
+.google-logo {
+    width: 225px !important;
+    mask: url(../image/logo-edg.svg) no-repeat 100% !important;
+    -webkit-mask: url(../image/logo-edg.svg) no-repeat 100% !important;
+}
