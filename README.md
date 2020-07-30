@@ -5,7 +5,7 @@
 ## 下载
 
 下载途径:
-- [国内下载](https://tool.misakal.xyz/crx/startpage.crx)
+- [国内下载](https://tool.misakal.xyz/crx/startpage1.0.12.crx)
 - [海外下载](https://github.com/NriotHrreion/Nocp-startpage/releases)
 - [旧版本下载](https://github.com/NriotHrreion/tools/releases)
 
