@@ -1,5 +1,5 @@
 {
-    "name": {"message": "Nocp Startpage[Beta]"},
+    "name": {"message": "Nocp Startpage"},
     "description": {"message": "更简洁的Chrome新标签页"},
     "tab": {"message": "新标签页"},
     "searchbox": {"message": "在Google上搜索，或输入网址"},
