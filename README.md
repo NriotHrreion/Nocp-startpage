@@ -9,6 +9,10 @@
 - [海外下载](https://github.com/NriotHrreion/Nocp-startpage/releases)
 - [旧版本下载](https://github.com/NriotHrreion/tools/releases)
 
+## 预览
+
+![预览](./preview.png)
+
 ## 使用
 
 下载后**解压**导入至Chrome即可
