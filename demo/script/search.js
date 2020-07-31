@@ -16,7 +16,7 @@ var logobox = document.getElementById("lb");
 if(ua.indexOf("edg") > -1) {
     var edgstyle = document.createElement("link");
     edgstyle.rel = "stylesheet";
-    edgstyle.href = "./css/edg.css";
+    edgstyle.href = "../css/edg.css";
     document.head.appendChild(edgstyle);
     logobox.title = "Microsoft";
 }
