@@ -8,7 +8,6 @@
  * License: Apache-2.0
  */
 document.title = chrome.i18n.getMessage("tab");
-document.getElementById("s").placeholder = chrome.i18n.getMessage("searchbox");
 document.getElementById("account").title = chrome.i18n.getMessage("title_2");
 document.getElementById("more").title = chrome.i18n.getMessage("title_3");
 document.getElementById("m-tit").innerHTML = chrome.i18n.getMessage("more");
@@ -27,6 +26,28 @@ if(ua.indexOf("edg") > -1) {
     logobox.title = "Microsoft";
 }
 
+// Search Engine
+var engine;
+
+chrome.storage.local.get({searchEngine: "google"}, function(data) {
+    if(data.searchEngine == "google") {
+        engine = chrome.i18n.getMessage("searchbox_google");
+        document.getElementById("s").placeholder = chrome.i18n.getMessage("searchbox_google");
+    } else if(data.searchEngine == "baidu") {
+        engine = chrome.i18n.getMessage("searchbox_baidu");
+        document.getElementById("s").placeholder = chrome.i18n.getMessage("searchbox_baidu");
+    } else if(data.searchEngine == "bing") {
+        engine = chrome.i18n.getMessage("searchbox_bing");
+        document.getElementById("s").placeholder = chrome.i18n.getMessage("searchbox_bing");
+    } else if(data.searchEngine == "sogou") {
+        engine = chrome.i18n.getMessage("searchbox_sogou");
+        document.getElementById("s").placeholder = chrome.i18n.getMessage("searchbox_sogou");
+    } else {
+        engine = chrome.i18n.getMessage("searchbox_google");
+        document.getElementById("s").placeholder = chrome.i18n.getMessage("searchbox_google");
+    }
+});
+
 document.onkeydown = function (f) {
     var d = window.event || f;
     var c = d.keyCode || d.which || d.charCode;
@@ -35,7 +56,22 @@ document.onkeydown = function (f) {
             var a = document.getElementById("s").value;
             var b = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/|[fF][tT][pP]:\/\/)+(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/;
             if (!b.test(a)) {
-                window.location.href = "https://google.com/search?safe=active&q="+ a +"&oq="+ a +"&sourceid=chrome&ie=utf-8";
+                chrome.storage.local.get({searchEngine: "google"}, function(data) {
+                    switch(data.searchEngine) {
+                        case "google":
+                            window.location.href = "https://google.com/search?safe=active&q="+ a +"&oq="+ a +"&sourceid=chrome&ie=utf-8";
+                            break;
+                        case "baidu":
+                            window.location.href = "https://baidu.com/s?wd="+ a +"&ie=utf-8";
+                            break;
+                        case "bing":
+                            window.location.href = "https://bing.com/search?q="+ a +"&qs=n";
+                            break;
+                        case "sogou":
+                            window.location.href = "https://sogou.com/web?query="+ a +"&_asf=www.sogou.com";
+                            break;
+                    }
+                });
             } else {
                 window.location.href = a;
             }
@@ -128,7 +164,7 @@ document.getElementById("s").onfocus = function() {
     this.placeholder = "";
 }
 document.getElementById("s").onblur = function() {
-    this.placeholder = "在百度上搜索，或输入网址";
+    this.placeholder = engine;
 }
 
 // voice search (annyang.js)

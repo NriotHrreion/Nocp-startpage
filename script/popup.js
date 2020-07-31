@@ -32,7 +32,7 @@ on1.onclick = function() {
         message: chrome.i18n.getMessage("info_1")
     });
     location.href = "chrome://newtab";
-}
+};
 off1.onclick = function() {
     on1.style.display = "block";
     off1.style.display = "none";
@@ -44,7 +44,29 @@ off1.onclick = function() {
         message: chrome.i18n.getMessage("info_1")
     });
     location.href = "chrome://newtab";
-}
+};
+
+var s_selector = document.getElementById("search_selector");
+
+chrome.storage.local.get({}, function(data) {
+    if(data.isFirstSet != 1) {
+        chrome.storage.local.set({searchEngine: "google", isFirstSet: 1});
+    }
+});
+chrome.storage.local.get({searchEngine: "google"}, function(data) {
+    if(typeof data.searchEngine === "string") {
+        s_selector.value = data.searchEngine;
+    }
+});
+s_selector.onchange = function() {
+    chrome.storage.local.set({searchEngine: this.value, isFirstSet: 1});
+    chrome.notifications.create({
+        type: "basic",
+        iconUrl: "../icon.png",
+        title: "Info",
+        message: "搜索引擎已切换为"+ this.value
+    });
+};
 
 new CustomEvent("startpage-by-nriothrreion", {});
 document.addEventListener("startpage-by-nriothrreion", function() {});
