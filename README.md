@@ -11,6 +11,8 @@
 
 ## 预览
 
+[查看Demo](https://nriothrreion.github.io/Nocp-startpage/demo/nstart.html)
+
 ![预览](./preview.png)
 
 ## 使用
