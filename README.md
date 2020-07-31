@@ -2,10 +2,6 @@
 
 更简洁的Chomre新标签页
 
-## Demo
-
-[查看Demo](https://nriothrreion.github.io/Nocp-startpage/demo/nstart.html)
-
 ## 下载
 
 下载途径:
@@ -14,6 +10,8 @@
 - [旧版本下载](https://github.com/NriotHrreion/tools/releases)
 
 ## 预览
+
+[查看Demo](https://nriothrreion.github.io/Nocp-startpage/demo/nstart.html)
 
 ![预览](./preview.png)
 
