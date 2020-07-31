@@ -1,5 +1,5 @@
 setTimeout(function() {
-    var style = document.getElementById("less:startpage-css-"+ document.getElementById("stylejs").getAttribute("data-style"));
+    var style = document.getElementById("less:Nocp-startpage-css-"+ document.getElementById("stylejs").getAttribute("data-style"));
     var copy = 
 `/**
  * Nocp Startpage
