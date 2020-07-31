@@ -15,6 +15,7 @@
     "context_2": {"message": "Search: %s"},
     "opt_1": {"message": "Use Bing Today Photo as bgimage"},
     "opt_2": {"message": "Upload Background Image"},
+    "opt_3": {"message": "Set search engine"},
     "img_default": {"message": "Default"},
     "img_upload": {"message": "Upload Image"},
     "info_1": {"message": "Please reload the page for the settings to take effect."}

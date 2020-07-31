@@ -15,6 +15,7 @@
     "context_2": {"message": "搜尋: %s"},
     "opt_1": {"message": "使用Bing今日美圖做背景圖"},
     "opt_2": {"message": "自定義背景圖"},
+    "opt_3": {"message": "切換檢索引擎"},
     "img_default": {"message": "設定為默認"},
     "img_upload": {"message": "上傳圖片"},
     "info_1": {"message": "請刷新以使設定生效"}
