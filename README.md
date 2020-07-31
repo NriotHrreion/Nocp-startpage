@@ -11,7 +11,7 @@
 
 ## 预览
 
-![预览](./preview.png)
+![预览](http://120.24.34.104:8920/startpage/preview.png)
 
 ## 使用
 
