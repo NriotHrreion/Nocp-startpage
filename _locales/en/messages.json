@@ -11,6 +11,8 @@
     "context_1": {"message": "Open a new tab"},
     "context_2": {"message": "Search: %s"},
     "opt_1": {"message": "Use Bing Today Photo as bgimage"},
-    "opt_2": {"message": "Picture auto change"},
+    "opt_2": {"message": "Upload Background Image"},
+    "img_default": {"message": "Default"},
+    "img_upload": {"message": "Upload Image"},
     "info_1": {"message": "Please reload the page for the settings to take effect."}
 }

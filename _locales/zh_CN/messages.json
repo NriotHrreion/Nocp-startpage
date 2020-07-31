@@ -11,6 +11,8 @@
     "context_1": {"message": "打开新的标签页"},
     "context_2": {"message": "搜索: %s"},
     "opt_1": {"message": "使用Bing今日美图做背景图"},
-    "opt_2": {"message": "图片轮播"},
+    "opt_2": {"message": "自定义背景图片"},
+    "img_default": {"message": "改为默认"},
+    "img_upload": {"message": "上传图片"},
     "info_1": {"message": "请刷新以使设置生效"}
 }

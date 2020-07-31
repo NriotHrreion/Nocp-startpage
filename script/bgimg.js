@@ -17,7 +17,7 @@ uploader.onchange = function() {
     };
 };
 
-document.getElementById("default").onclick = function() {
+document.getElementById("img_default").onclick = function() {
     chrome.storage.local.set({imgurl: "image/bg.jpg"});
     chrome.notifications.create({
         type: "basic",

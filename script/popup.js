@@ -3,6 +3,9 @@
  */
 document.getElementById("description").innerHTML = chrome.i18n.getMessage("description");
 document.getElementById("opt_1").innerHTML = chrome.i18n.getMessage("opt_1");
+document.getElementById("opt_2").innerHTML = chrome.i18n.getMessage("opt_2");
+document.getElementById("img_default").innerHTML = chrome.i18n.getMessage("img_default");
+document.getElementById("img_upload").innerHTML = chrome.i18n.getMessage("img_upload");
 
 
 var on1 = document.getElementById("on_1");
