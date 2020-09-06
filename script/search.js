@@ -12,6 +12,7 @@ document.getElementById("account").title = chrome.i18n.getMessage("title_2");
 document.getElementById("more").title = chrome.i18n.getMessage("title_3");
 document.getElementById("m-tit").innerHTML = chrome.i18n.getMessage("more");
 document.getElementById("sbox").title = chrome.i18n.getMessage("title_1");
+document.getElementById("voice-s").title = chrome.i18n.getMessage("voice_search");
 
 preload("https://api.misakal.xyz/Bing-Image");
 
@@ -79,10 +80,10 @@ document.onkeydown = function (f) {
     }
 };
 document.querySelector(".background").style.opacity = "1";
-chrome.storage.local.get({bgimg: true, imgurl: "image/bg.jpg"}, function (a) {
-    if (a.bgimg == true) {
+chrome.storage.local.get({bgimg: false, imgurl: "image/bg.jpg"}, function (a) {
+    if (a.bgimg) {
         document.querySelector(".background").style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)), url(https://api.misakal.xyz/Bing-Image)";
-    } else if(a.bgimg == false) {
+    } else if(!a.bgimg) {
         var bgstyle = 
 `.background{
     background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)), url(${a.imgurl});
@@ -165,28 +166,6 @@ document.getElementById("s").onfocus = function() {
 }
 document.getElementById("s").onblur = function() {
     this.placeholder = engine;
-}
-
-// voice search (annyang.js)
-var voicestat = 0;
-if(annyang) {
-    var commands = {
-        "*s": function(s) {
-            document.getElementById("s").value = s;
-            document.getElementById("s").focus();
-        }
-    }
-}
-document.getElementById("voice-s").onclick = function() {
-    if(voicestat == 0) {
-        annyang.addCommands(commands);
-        annyang.setLanguage("zh-cn");
-        annyang.start();
-        voicestat++;
-    } else {
-        annyang.pause();
-        voicestat--;
-    }
 }
 
 function setOpacity(a, b) {

@@ -12,7 +12,7 @@ document.getElementById("img_upload").innerHTML = chrome.i18n.getMessage("img_up
 var on1 = document.getElementById("on_1");
 var off1 = document.getElementById("off_1");
 
-chrome.storage.local.get({bgimg: true}, function(data) {
+chrome.storage.local.get({bgimg: false}, function(data) {
     if(data.bgimg == true) {
         on1.style.display = "block";
         off1.style.display = "none";

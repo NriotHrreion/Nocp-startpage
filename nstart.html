@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-    <meta http-equiv="Content-Security-Policy" content="default-src *; child-src *; img-src 'self' data: base64 https://*.misakal.xyz/ https://*.bing.com/ https://assets.msn.com/; style-src 'self' 'unsafe-inline' data: base64; script-src 'self' 'unsafe-inline' 'unsafe-eval';">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; child-src *; img-src 'self' data: base64 https://*.misakal.xyz/ https://*.bing.com/ https://bing.com/th https://assets.msn.com/; style-src 'self' 'unsafe-inline' data: base64; script-src 'self' 'unsafe-inline' 'unsafe-eval';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="NriotHrreion">
     <meta name="application-name" content="Nocp Startpage">
@@ -15,13 +15,13 @@
     <script type="text/javascript" src="lib/less-config.js"></script>
     <script type="text/javascript" src="lib/less.min.js"></script>
     <script type="text/javascript" src="lib/style.js" id="stylejs" data-style="page"></script>
-    <script type="text/javascript" src="lib/annyang.min.js"></script>
+    <script type="text/javascript" src="script/voice.js" defer></script>
 </head>
 <body>
     <!-- background -->
-    <div class="background"></div>
+    <div class="background" aria-hidden="true"></div>
+    <!-- more -->
     <div class="morebox">
-        <!-- more -->
         <a href="http://gmail.com" class="more-gmail">Gmail</a>
         <a href="http://google.com/imghp" class="more-picture">Pictures</a>
         <a href="https://myaccount.google.com"><img src="image/account.png" width="35px" height="35px" id="account" class="account"></a>
@@ -42,15 +42,21 @@
             </div>
         </div>
     </div>
+    <!-- content -->
     <div class="content">
         <div class="google-logo" id="lb" title="Google" aria-hidden="true"></div>
-        <div class="searchbox" id="sbox">
+        <div class="searchbox" id="sbox" tabindex="0">
             <!-- search box -->
-            <input type="url" class="search" id="s" autocomplete="off">
+            <input type="url" class="search" id="s" autocomplete="off" spellcheck="false" aria-live="polite">
             <!-- voice search button -->
-            <button class="voice" id="voice-s"></button>
+            <button class="voice" id="voice-s" aria-hidden="true"></button>
+            <!-- history list box -->
+            <div id="history-list" class="history-list"></div>
         </div>
+        <!-- <iframe src="https://ogs.google.com/u/0/widget/app" frameborder="0"></iframe> -->
     </div>
-    <script type="text/javascript" src="script/search.js" defer></script>
+    <script type="text/javascript" src="script/init.js"></script>
+    <script type="text/javascript" src="script/search.js"></script>
+    <script type="text/javascript" src="script/history.js"></script>
 </body>
 </html>

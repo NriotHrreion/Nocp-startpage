@@ -6,6 +6,7 @@
     "searchbox_baidu": {"message": "Search Baidu, or type a url"},
     "searchbox_bing": {"message": "Search Bing, or type a url"},
     "searchbox_sogou": {"message": "Search Sougou, or type a url"},
+    "voice_search": {"message": "voice search"},
     "cantset": {"message": "You can't change this switch."},
     "more": {"message": "More App"},
     "title_1": {"message": "Search"},
