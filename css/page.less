@@ -4,9 +4,6 @@
 @import "font.less";
 
 // functions
-@middlevar: {
-    vertical-align: middle;
-}
 .more-buttons(@right, @margin) {
 	position: absolute;
 	bottom: 0;
@@ -97,10 +94,17 @@ body {
 			color: @searchbox-text-color;
 			caret-color: @searchbox-caret-color;
 			margin-left: 10px;
+			vertical-align: middle;
+			&::-webkit-input-placeholder {
+				color: @color-placeholder;
+			}
+			&::selection {
+				color: @color-placeholder;
+			}
 			&:focus::selection {
+				color: @color-black;
 				background-color: @searchbox-select-color;
 			}
-			@middlevar();
 		}
 		.voice {
 			width: 22px;

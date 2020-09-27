@@ -168,11 +168,17 @@ document.getElementById("s").onblur = function() {
     this.placeholder = engine;
 }
 
+chrome.storage.onChanged.addListener(function(data) {
+    if(typeof data.imgUrl === "string") {
+        location.reload();
+    }
+});
+
 function setOpacity(a, b) {
     if (a.filters) {
-        a.style.filter = "alpha(opacity=" + b + ")"
+        a.style.filter = "alpha(opacity=" + b + ")";
     } else {
-        a.style.opacity = b / 100
+        a.style.opacity = b / 100;
     }
 }
 

@@ -7,13 +7,22 @@ uploader.onchange = function() {
         var filename = uploader.value;
         filename = filename.replace(/^.+?\\([^\\]+?)(\.[^\.\\]*?)?$/gi, "$1");
 
-        chrome.storage.local.set({imgurl: this.result});
-        chrome.notifications.create({
-            type: "basic",
-            iconUrl: "../icon.png",
-            title: "Info",
-            message: "背景图片已设置为"+ filename
-        });
+        if(this.result.length / 1000000 < 4.5) {
+            chrome.storage.local.set({imgurl: this.result});
+            chrome.notifications.create({
+                type: "basic",
+                iconUrl: "../icon.png",
+                title: "Info",
+                message: "背景图片已设置为"+ filename
+            });
+        } else {
+            chrome.notifications.create({
+                type: "basic",
+                iconUrl: "../icon.png",
+                title: "Error",
+                message: "背景图片无法设置为"+ filename +", 因为该文件超过 4.5MB"
+            });
+        }
     };
 };
 

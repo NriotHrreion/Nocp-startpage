@@ -1,13 +1,20 @@
-(function(window) {
-    chrome.storage.local.get({initStatus: false}, function(data) {
-        if(!data.initStatus) {
-            init();
-            chrome.storage.local.set({initStatus: true});
-            window.location.reload();
-        }
-    });
+class Init {
+    constructor() {
+        this.firstTime();
+        // this.init();
+    }
 
-    function init() {
+    firstTime() {
+        chrome.storage.local.get({initStatus: false}, (data) => {
+            if(!data.initStatus) {
+                this.firstTimeItems();
+                chrome.storage.local.set({initStatus: true});
+                window.location.reload();
+            }
+        });
+    }
+
+    firstTimeItems() {
         chrome.storage.local.set({searchEngine: "google"});
         chrome.storage.local.set({
             history: [
@@ -18,4 +25,9 @@
             ]
         });
     }
-})(window);
+
+    init() {
+        var widget = window.frames["app-widget"];
+        widget.window = undefined;
+    }
+}
