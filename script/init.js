@@ -1,7 +1,8 @@
 class Init {
     constructor() {
         this.firstTime();
-        // this.init();
+
+        document.body.setAttribute("nocp-startpage", "");
     }
 
     firstTime() {
@@ -25,9 +26,6 @@ class Init {
             ]
         });
     }
-
-    init() {
-        var widget = window.frames["app-widget"];
-        widget.window = undefined;
-    }
 }
+
+new Init();

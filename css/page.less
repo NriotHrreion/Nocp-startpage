@@ -1,13 +1,15 @@
 @charset "UTF-8";
 
-@import "colors.less";
+@import "var.less";
 @import "font.less";
+@import "notes.less";
+@import "apps.less";
 
 // functions
-.more-buttons(@right, @margin) {
+.more-buttons(@pos, @hl, @margin) {
 	position: absolute;
 	bottom: 0;
-	right: @right;
+	@{pos}: @hl;
 	cursor: pointer;
 	margin: @margin;
 	&:hover {
@@ -15,19 +17,6 @@
 	}
 	&:active {
 		opacity: 69%;
-	}
-}
-.more-links(@right) {
-	position: fixed;
-	bottom: 9.5px;
-	right: @right;
-	color: @color-white;
-	margin: 19px;
-	text-decoration: none;
-	outline: none;
-	&:hover {
-		text-decoration: underline;
-		opacity: 90%;
 	}
 }
 
@@ -53,7 +42,8 @@ body {
   	padding: 0;
   	position: fixed;
   	top: 0;
-  	transition: opacity 700ms;
+	transition: opacity 700ms;
+	-webkit-transition: opacity 700ms;  
 	width: 100%;
 	z-index: -2;
 }
@@ -182,39 +172,12 @@ body {
 	bottom: 0;
 	width: 100%;
 	.more {
-		.more-buttons(0, 23px);
+		.more-buttons(right, 0, 23px);
 	}
 	.account {
-		.more-buttons(53px, 19px);
+		.more-buttons(right, 53px, 19px);
 	}
-	.more-gmail {
-		.more-links(105px);
-	}
-	.more-picture {
-		.more-links(150px);
-	}
-	.more-item {
-		vertical-align: middle;
-		position: fixed;
-		right: 23px;
-		bottom: 92px;
-		overflow: hidden;
-		width: 310px;
-		height: 400px;
-		background-color: @color-white;
-		border-radius: 7px;
-		  display: none;
-		#m-tit {
-			text-decoration: none;
-			color: @more-title-color;
-			font-size: 13pt;
-			font-weight: 700;
-			margin: 20px 35px;
-		}
-		.applications a img {
-			width: 40px;
-			height: 40px;
-			margin: 30px;
-		}
+	.applications {
+		.more-buttons(left, 0, 23px);
 	}
 }

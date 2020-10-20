@@ -7,14 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="NriotHrreion">
     <meta name="application-name" content="Nocp Startpage">
-    <meta name="easter" content="./wow.txt">
-    <script type="text/javascript" src="lib/console.js"></script>
-    <script type="text/javascript" src="lib/preload.js"></script>
+    <script type="text/javascript" src="util/console.js"></script>
+    <script type="text/javascript" src="util/preload.js"></script>
     <link rel="prefetch" href="./image/bg.jpg" as="image">
     <link rel="stylesheet/less" type="text/css" href="css/page.less">
     <script type="text/javascript" src="lib/less-config.js"></script>
     <script type="text/javascript" src="lib/less.min.js"></script>
-    <script type="text/javascript" src="lib/style.js" id="stylejs" data-style="page"></script>
+    <script type="text/javascript" src="lib/uinblunx.js"></script>
+    <script type="text/javascript" src="util/style.js" id="stylejs" data-style="page"></script>
     <script type="text/javascript" src="script/voice.js" defer></script>
 </head>
 <body>
@@ -22,23 +22,33 @@
     <div class="background" aria-hidden="true"></div>
     <!-- more -->
     <div class="morebox">
-        <a href="http://gmail.com" class="more-gmail">Gmail</a>
-        <a href="http://google.com/imghp" class="more-picture">Pictures</a>
+        <img src="image/more.png" width="30px" height="30px" id="apps" class="applications">
         <a href="https://myaccount.google.com"><img src="image/account.png" width="35px" height="35px" id="account" class="account"></a>
-        <img src="image/more.png" width="30px" height="30px" id="more" class="more">
-        <!-- links -->
+        <img src="image/note.svg" width="30px" height="30px" id="more" class="more">
+        <!-- notes -->
         <div class="more-item" id="more-item">
-            <p id="m-tit"></p>
-            <div class="applications" aria-hidden="true">
-                <a href="https://youtube.com" title="Youtube"><img src="image/google/youtube.png"></a>
-                <a href="https://twitter.com" title="Twitter"><img src="image/google/twitter.png"></a>
-                <a href="https://facebook.com" title="Facebook"><img src="image/google/facebook.png"></a>
-                <a href="https://instagram.com" title="Instagram"><img src="image/google/ins.png"></a>
-                <a href="https://google.com" title="Google Search"><img src="image/google/googlesearch.png"></a>
-                <a href="https://blogger.com" title="Blogger"><img src="image/google/blogger.png"></a>
-                <a href="https://translate.google.com" title="Google Translate"><img src="image/google/translate.png"></a>
-                <a href="https://github.com" title="Github"><img src="image/google/github.png"></a>
-                <a href="https://baidu.com" title="Baidu"><img src="image/google/baidu.png"></a>
+            <p id="n-tit"></p>
+            <div class="note" aria-hidden="true">
+                <!-- new note -->
+                <div class="note-write">
+                    <input type="text" class="note-new" id="n-write" autocomplete="off">
+                    <button class="note-submit" id="n-submit"></button>
+                </div>
+                <!-- note content -->
+                <div class="note-body" id="n-body"></div>
+            </div>
+        </div>
+        <!-- applications -->
+        <div class="apps" id="app-container">
+            <div class="apps-header">
+                <p id="a-tit"></p>
+                <div class="apps-time">
+                    <span id="app-timeform"></span>
+                </div>
+            </div>
+            <div class="apps-body" id="app-body"></div>
+            <div class="apps-back" id="app-backhome">
+                <span>×</span>
             </div>
         </div>
     </div>
@@ -53,9 +63,9 @@
             <!-- history list box -->
             <div id="history-list" class="history-list"></div>
         </div>
-        <!-- <iframe src="https://ogs.google.com/u/0/widget/app" frameborder="0" id="app-widget"></iframe> -->
     </div>
     <!-- scripts -->
+    <script type="text/javascript" src="lib/util.min.js"></script>
     <script type="text/javascript" src="script/init.js"></script>
     <script type="text/javascript" src="script/search.js"></script>
     <script type="text/javascript" src="script/history.js"></script>

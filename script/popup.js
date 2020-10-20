@@ -1,74 +1,82 @@
-/**
- * Locale
- */
-document.getElementById("description").innerHTML = chrome.i18n.getMessage("description");
-document.getElementById("opt_1").innerHTML = chrome.i18n.getMessage("opt_1");
-document.getElementById("opt_2").innerHTML = chrome.i18n.getMessage("opt_2");
-document.getElementById("opt_3").innerHTML = chrome.i18n.getMessage("opt_3");
-document.getElementById("img_default").innerHTML = chrome.i18n.getMessage("img_default");
-document.getElementById("img_upload").innerHTML = chrome.i18n.getMessage("img_upload");
+class Popup {
+    constructor() {
+        this.inputs = [
+            {on: utils.$("on_1"), off: utils.$("off_1")},
+            utils.$("search_selector")
+        ];
 
-
-var on1 = document.getElementById("on_1");
-var off1 = document.getElementById("off_1");
-
-chrome.storage.local.get({bgimg: false}, function(data) {
-    if(data.bgimg == true) {
-        on1.style.display = "block";
-        off1.style.display = "none";
-    } else if(data.bgimg == false) {
-        on1.style.display = "none";
-        off1.style.display = "block";
+        this.initPopup();
+        this.initLocale();
     }
-});
 
-on1.onclick = function() {
-    on1.style.display = "none";
-    off1.style.display = "block";
-    chrome.storage.local.set({bgimg: false});
-    chrome.notifications.create({
-        type: "basic",
-        iconUrl: "../icon.png",
-        title: "Info",
-        message: chrome.i18n.getMessage("info_1")
-    });
-    location.href = "chrome://newtab";
-};
-off1.onclick = function() {
-    on1.style.display = "block";
-    off1.style.display = "none";
-    chrome.storage.local.set({bgimg: true});
-    chrome.notifications.create({
-        type: "basic",
-        iconUrl: "../icon.png",
-        title: "Info",
-        message: chrome.i18n.getMessage("info_1")
-    });
-    location.href = "chrome://newtab";
-};
+    initPopup() {
+        chrome.storage.local.get({bgimg: false}, (data) => {
+            if(data.bgimg == true) {
+                this.inputs[0].on.style.display = "block";
+                this.inputs[0].off.style.display = "none";
+            } else if(data.bgimg == false) {
+                this.inputs[0].on.style.display = "none";
+                this.inputs[0].off.style.display = "block";
+            }
+        });
 
-var s_selector = document.getElementById("search_selector");
+        this.inputs[0].on.onclick = () => {
+            this.inputs[0].on.style.display = "none";
+            this.inputs[0].off.style.display = "block";
+            chrome.storage.local.set({bgimg: false});
+            chrome.notifications.create({
+                type: "basic",
+                iconUrl: "../icon.png",
+                title: "Info",
+                message: chrome.i18n.getMessage("info_1")
+            });
+            location.href = "chrome://newtab";
+        };
+        this.inputs[0].off.onclick = () => {
+            this.inputs[0].on.style.display = "block";
+            this.inputs[0].off.style.display = "none";
+            chrome.storage.local.set({bgimg: true});
+            chrome.notifications.create({
+                type: "basic",
+                iconUrl: "../icon.png",
+                title: "Info",
+                message: chrome.i18n.getMessage("info_1")
+            });
+            location.href = "chrome://newtab";
+        };
 
-chrome.storage.local.get({}, function(data) {
-    if(data.isFirstSet != 1) {
-        chrome.storage.local.set({searchEngine: "google", isFirstSet: 1});
+        chrome.storage.local.get({}, (data) => {
+            if(data.isFirstSet != 1) {
+                chrome.storage.local.set({searchEngine: "google", isFirstSet: 1});
+            }
+        });
+        chrome.storage.local.get({searchEngine: "google"}, (data) => {
+            if(typeof data.searchEngine === "string") {
+                this.inputs[1].value = data.searchEngine;
+            }
+        });
+        this.inputs[1].onchange = function() {
+            chrome.storage.local.set({searchEngine: this.value, isFirstSet: 1});
+            chrome.notifications.create({
+                type: "basic",
+                iconUrl: "../icon.png",
+                title: "Info",
+                message: "搜索引擎已切换为"+ this.value
+            });
+        };
     }
-});
-chrome.storage.local.get({searchEngine: "google"}, function(data) {
-    if(typeof data.searchEngine === "string") {
-        s_selector.value = data.searchEngine;
-    }
-});
-s_selector.onchange = function() {
-    chrome.storage.local.set({searchEngine: this.value, isFirstSet: 1});
-    chrome.notifications.create({
-        type: "basic",
-        iconUrl: "../icon.png",
-        title: "Info",
-        message: "搜索引擎已切换为"+ this.value
-    });
-};
 
-new CustomEvent("startpage-by-nriothrreion", {});
-document.addEventListener("startpage-by-nriothrreion", function() {});
+    initLocale() {
+        utils.$("description").innerHTML = utils.locale("description");
+        utils.$("opt_1").innerHTML = utils.locale("opt_1");
+        utils.$("opt_2").innerHTML = utils.locale("opt_2");
+        utils.$("opt_3").innerHTML = utils.locale("opt_3");
+        utils.$("img_default").innerHTML = utils.locale("img_default");
+        utils.$("img_upload").innerHTML = utils.locale("img_upload");
+    }
+}
+
+new Popup();
+
+utils.copy();
 
