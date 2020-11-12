@@ -1,3 +1,14 @@
+/**
+ * Nocp Startpage
+ * Copyright (c) NriotHrreion 2020
+ *
+ * Thank you for your use.
+ * If the startpage has bug, please tell me on github, I'll fix it!
+ *
+ * @author NriotHrreion
+ * @license Apache-2.0
+ */
+
 console.log("%cCopyright (c) NriotHrreion 2020", "color: darkred");
 
 chrome.browserAction.setBadgeText({text: "off"});

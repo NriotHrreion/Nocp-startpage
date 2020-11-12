@@ -21,7 +21,7 @@ searchbox.addEventListener("blur", function() {
 search.addEventListener("keydown", function(e) {
     var eve = window.event || e;
     var key = eve.keyCode || eve.which || eve.charCode;
-    if(key == 13 && search.value != "") {
+    if(key == 13 && search.value != "" && search.value.indexOf("/") < 0) {
         chrome.storage.local.get({history: [{text: "百度", url: "https://baidu.com"}], searchEngine: "google"}, function(data) {
             var history_list = data.history;
             switch(data.searchEngine) {

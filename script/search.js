@@ -5,7 +5,8 @@
  * Thank you for your use.
  * If the startpage has bug, please tell me on github, I'll fix it!
  *
- * License: Apache-2.0
+ * @author NriotHrreion
+ * @license Apache-2.0
  */
 
 /**
@@ -21,6 +22,8 @@ class Main {
         this.elements = {
             /** @type {HTMLDivElement} */
             BACKGROUND: utils.$("cls", "background")[0],
+            /** @type {HTMLDivElement} */
+            LOGO: utils.$("lb"),
             /** @type {HTMLInputElement} */
             SEARCH: utils.$("s"),
             /** @type {HTMLDivElement} */
@@ -203,7 +206,7 @@ class Main {
                 if(this.elements.SEARCH.value != "") {
                     var content = this.elements.SEARCH.value;
                     var reg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/|[fF][tT][pP]:\/\/)+(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/;
-                    if (!reg.test(content)) {
+                    if(!reg.test(content) && content.indexOf("/") < 0) {
                         chrome.storage.local.get({searchEngine: "google"}, (data) => {
                             switch(data.searchEngine) {
                                 case "google":
@@ -220,6 +223,75 @@ class Main {
                                     break;
                             }
                         });
+                    } else if(content.indexOf("/") == 0) {
+                        var command = content.replace("/", "");
+                        command = command.split(" ");
+                        switch(command[0]) {
+                            case "help":
+                                alert(
+                                    "/help - Command help\n"+
+                                    "/alert <message> - Alert\n"+
+                                    "/prompt <message> - Prompt\n"+
+                                    "/confirm <message> - Confirm\n"+
+                                    "/favicon - Go to the favicon page\n"+
+                                    "/manifest - See the manifest.json\n"+
+                                    "/logo [d|e] - Display or Hide the logo\n"+
+                                    "/reload - Reload the page\n"+
+                                    "/close - Close the page\n"+
+                                    "/hideall - Hide all elements\n"+
+                                    "/app <app-name> - Open a app\n"+
+                                    "/about - About info"
+                                );
+                                break;
+                            case "alert":
+                                alert(command[1]);
+                                break;
+                            case "prompt":
+                                var r = prompt(command[1]);
+                                alert(r);
+                                break;
+                            case "confirm":
+                                confirm(command[1]);
+                                break;
+                            case "favicon":
+                                location.href = "./favicon.html";
+                                break;
+                            case "manifest":
+                                location.href = "./manifest.json";
+                                break;
+                            case "reload":
+                                location.reload();
+                                break;
+                            case "close":
+                                window.close();
+                                break;
+                            case "logo":
+                                if(command[1] == "d") {
+                                    this.elements.LOGO.style.display = "none";
+                                } else if(command[1] == "e") {
+                                    this.elements.LOGO.style.display = "block";
+                                } else {
+                                    alert("Please enter the true argument.");
+                                }
+                                break;
+                            case "hideall":
+                                document.getElementsByClassName("morebox")[0].style.display = "none";
+                                document.getElementsByClassName("content")[0].style.display = "none";
+                                break;
+                            case "app":
+                                location.href = command[1] +"://";
+                                break;
+                            case "about":
+                                utils.manifest(function(manifest) {
+                                    alert("Name: "+ utils.locale("name") +"\nVersion: "+ manifest.version +"\nAuthor: "+ manifest.author);
+                                });
+                                break;
+                            default:
+                                alert("Unknow command, type /help for help.");
+                                break;
+                        }
+
+                        this.elements.SEARCH.value = "";
                     } else {
                         window.location.href = content;
                     }
@@ -353,37 +425,43 @@ class Main {
 
         chrome.bookmarks.getTree((tree) => {
             var bookmark = tree[0]["children"][0]["children"];
+            var j = 0;
+
             for(let i in bookmark) {
                 var name = bookmark[i].title;
                 var url = bookmark[i].url;
                 var icon = "./favicon.html?url="+ url;
 
-                var app_card = utils.$new("div");
-                app_card.className = "apps-l";
-                app_card.title = name;
-                app_card.setAttribute("l-url", url);
-                app_card.onclick = function() {window.location.href = this.getAttribute("l-url")};
-                var app_icon = utils.$new("div");
-                app_icon.className = "apps-icon";
-                var app_icon_img = utils.$new("iframe");
-                app_icon_img.src = icon;
-                app_icon_img.setAttribute("frameBorder", 0);
-                app_icon.appendChild(app_icon_img);
-                app_card.appendChild(app_icon);
-                var app_name = utils.$new("div");
-                app_name.className = "apps-name";
-                var app_name_p = utils.$new("p");
-                if(name != "") {
-                    app_name_p.innerText = name;
-                } else {
-                    app_name_p.innerHTML = "&nbsp;";
-                }
-                app_name.appendChild(app_name_p);
-                app_card.appendChild(app_name);
-                this.elements.APPS_BODY.appendChild(app_card);
+                if(url.indexOf("javascript:") < 0 && url.indexOf("data:") < 0) {
+                    var app_card = utils.$new("div");
+                    app_card.className = "apps-l";
+                    app_card.title = name;
+                    app_card.setAttribute("l-url", url);
+                    app_card.onclick = function() {window.location.href = this.getAttribute("l-url")};
+                    var app_icon = utils.$new("div");
+                    app_icon.className = "apps-icon";
+                    var app_icon_img = utils.$new("iframe");
+                    app_icon_img.src = icon;
+                    app_icon_img.setAttribute("frameBorder", 0);
+                    app_icon.appendChild(app_icon_img);
+                    app_card.appendChild(app_icon);
+                    var app_name = utils.$new("div");
+                    app_name.className = "apps-name";
+                    var app_name_p = utils.$new("p");
+                    if(name != "") {
+                        app_name_p.innerText = name;
+                    } else {
+                        app_name_p.innerHTML = "&nbsp;";
+                    }
+                    app_name.appendChild(app_name_p);
+                    app_card.appendChild(app_name);
+                    this.elements.APPS_BODY.appendChild(app_card);
 
-                if(i == 6) {
-                    this.elements.APPS_BODY.appendChild(utils.$new("br"));
+                    j++;
+
+                    if(j % 6 == 0 && j != 0) {
+                        this.elements.APPS_BODY.appendChild(utils.$new("br"));
+                    }
                 }
             }
         });

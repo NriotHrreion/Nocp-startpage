@@ -1,5 +1,6 @@
 (function(window) {
     window.utils = {
+        _: function(){},
         $: function(type, elem) {
             if(arguments[0] || arguments[1]) {
                 switch(type) {
@@ -27,6 +28,17 @@
         copy: function() {
             new CustomEvent("A|startpage-by-nriothrreion", {});
             document.addEventListener("A|startpage-by-nriothrreion", function() {});
+        },
+        global: function(variable, varName) {
+            window[varName] = variable;
+        },
+        manifest: function(callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("get", "../manifest.json");
+            xhr.send(null);
+            xhr.onload = function() {
+                callback(JSON.parse(this.responseText));
+            };
         }
     };
 })(window);

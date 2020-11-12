@@ -1,5 +1,13 @@
 setTimeout(function() {
     var style = document.getElementById("less:css-"+ document.getElementById("stylejs").getAttribute("data-style"));
+    var sourceMap = {
+        version: 3,
+        file: "style.css",
+        sources: ["nocp-sources://less/style.less"],
+        sourcesContent: [style.innerHTML],
+        mappings: ";AAAA",
+        sourceRoot: ""
+    };
     style.innerHTML = css_compress(style.innerHTML) +"\n/* Copyright (c) NriotHrreion 2020 */";
     document.head.removeChild(document.getElementById("stylejs"));
 }, 100);
