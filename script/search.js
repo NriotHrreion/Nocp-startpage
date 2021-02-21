@@ -52,7 +52,7 @@ class Main {
 
         this.init();
         this.initLocale();
-        preload("https://api.misakal.xyz/Bing-Image");
+        // preload("https://api.misakal.xyz/Bing-Image");
         this.initPage();
     }
 
@@ -122,7 +122,9 @@ class Main {
 
         chrome.storage.local.get({bgimg: false, imgurl: "image/bg.jpg"}, (data) => {
             if(data.bgimg) {
-                this.elements.BACKGROUND.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)), url(https://api.misakal.xyz/Bing-Image)";
+                utils.getBingImage((url) => { // fetch Bing image
+                    this.elements.BACKGROUND.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)), url("+ url +")";
+                });
             } else if(!data.bgimg) {
                 var bgstyle = 
 `.background{
@@ -230,9 +232,6 @@ class Main {
                             case "help":
                                 alert(
                                     "/help - Command help\n"+
-                                    "/alert <message> - Alert\n"+
-                                    "/prompt <message> - Prompt\n"+
-                                    "/confirm <message> - Confirm\n"+
                                     "/favicon - Go to the favicon page\n"+
                                     "/manifest - See the manifest.json\n"+
                                     "/logo [d|e] - Display or Hide the logo\n"+
@@ -242,16 +241,6 @@ class Main {
                                     "/app <app-name> - Open a app\n"+
                                     "/about - About info"
                                 );
-                                break;
-                            case "alert":
-                                alert(command[1]);
-                                break;
-                            case "prompt":
-                                var r = prompt(command[1]);
-                                alert(r);
-                                break;
-                            case "confirm":
-                                confirm(command[1]);
                                 break;
                             case "favicon":
                                 location.href = "./favicon.html";
@@ -296,6 +285,8 @@ class Main {
                         window.location.href = content;
                     }
                 }
+            } else if(key == 47) {
+                
             }
         };
     }

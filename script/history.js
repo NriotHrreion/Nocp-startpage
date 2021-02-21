@@ -49,6 +49,13 @@ chrome.storage.local.get({history: [{text: "百度", url: "https://baidu.com"}]}
         item.title = data.history[i].text;
         item.href = data.history[i].url;
         item.className = "history-item";
+        item.setAttribute("data-hover", "false");
+        item.addEventListener("mouseenter", function() {
+            this.setAttribute("data-hover", "true");
+        });
+        item.addEventListener("mouseleave", function() {
+            this.setAttribute("data-hover", "false");
+        });
         var text = document.createElement("div");
         text.innerHTML = data.history[i].text;
         text.className = "history-text";

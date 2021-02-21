@@ -39,6 +39,15 @@
             xhr.onload = function() {
                 callback(JSON.parse(this.responseText));
             };
+        },
+        getBingImage: function(callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("get", "https://cn.bing.com/HPImageArchive.aspx?format=js&idx=$daysAgo&n=1");
+            xhr.send(null);
+            xhr.onload = function() {
+                var data = JSON.parse(this.responseText);
+                callback("https://cn.bing.com"+ data.images[0].url);
+            };
         }
     };
 })(window);

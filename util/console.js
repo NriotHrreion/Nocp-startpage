@@ -1,4 +1,4 @@
-consoleInfo(" INFO ", "Nocp Startpage\nCopyright (c) NriotHrreion 2020\n\nThank you for your use.\nIf the startpage has bug, please tell me on github, I'll fix it!\nAnd those icons are from https://iconfont.cn\n\nBingImage API: https://github.com/jinzhijie/Bing-Api\nGithub: https://github.com/NriotHrreion/Nocp-startpage\nLicense: Apache-2.0");
+consoleInfo(" INFO ", "Nocp Startpage\nCopyright (c) NriotHrreion 2020\n\nThank you for your use.\nIf the startpage has bug, please tell me on github, I'll fix it!\nAnd those icons are from https://iconfont.cn\n\nBackground Image API: https://cn.bing.com/HPImageArchive.aspx?format=js&idx=$daysAgo&n=1\nGithub: https://github.com/NriotHrreion/Nocp-startpage\nLicense: Apache-2.0");
 
 function consoleInfo(head, info, type, other) {
     console.group("%c"+ head, "background-color:#099ef5;font-weight:bold;color:#fff;");

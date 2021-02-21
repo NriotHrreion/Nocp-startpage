@@ -152,6 +152,23 @@ body {
 					-webkit-mask-position: center;
 					-webkit-mask-size: 20px;
 				}
+				&[data-hover=true]::after {
+					content: "";
+					width: 20px;
+					height: 20px;
+					display: block;
+					position: relative;
+					top: 4px;
+					right: 8px;
+					float: right;
+					background-color: @historybox-item-icon-color;
+					mask: url(../image/delete.svg) no-repeat;
+					mask-position: center;
+					mask-size: 20px;
+					-webkit-mask: url(../image/delete.svg) no-repeat;
+					-webkit-mask-position: center;
+					-webkit-mask-size: 20px;
+				}
 			}
 		}
 		&::before {
