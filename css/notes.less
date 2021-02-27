@@ -2,7 +2,7 @@
 
 @import "var.less";
 
-.more-item {
+.notes {
     vertical-align: middle;
     position: fixed;
     left: 0;
@@ -10,7 +10,6 @@
     bottom: 0;
     overflow: hidden;
     width: 0;
-    // width: 310px;
     background-color: @color-white;
     transition: width ease .4s;
     -webkit-transition: width ease .4s;
@@ -22,7 +21,7 @@
         font-weight: 700;
         margin: 20px 35px;
     }
-    .note {
+    .note-main {
         width: calc(100% - 10px * 2);
         height: calc(100% - 63px - 10px);
         margin: 10px;
@@ -62,21 +61,82 @@
                 display: inline-block;
                 padding: 5px 16px;
                 font-size: 14px;
+                font-weight: 500;
                 line-height: 20px;
                 white-space: nowrap;
                 vertical-align: middle;
+                background-color: @note-btn-background-color;
                 border: 1px solid;
                 border-radius: 6px;
-                border-color: @note-newsub-border-color;
+                border-color: @note-btn-border-color;
                 outline: none;
                 appearance: none;
                 box-shadow: 0 1px 0 rgba(27, 31, 35, .04), inset 0 1px 0 hsla(0, 0%, 100%, 0.25);
                 transition: background-color .2s cubic-bezier(.3, 0, .5, 1);
                 -webkit-transition: background-color .2s cubic-bezier(.3, 0, .5, 1);
                 &:active {
-                    background-color: @note-newsub-background-active-color;
+                    background-color: @note-btn-background-active-color !important;
                     box-shadow: inset 0 1px 0 rgba(225, 228, 232, .2);
                     transition: none;
+                }
+                &:hover {
+                    background-color: @note-btn-background-hover-color;
+                }
+            }
+            .note-delete {
+                cursor: pointer;
+                display: none;
+                padding: 5px 16px;
+                font-size: 14px;
+                font-weight: 500;
+                color: @note-btn-danger-color;
+                line-height: 20px;
+                white-space: nowrap;
+                vertical-align: middle;
+                background-color: @note-btn-background-color;
+                border: 1px solid;
+                border-radius: 6px;
+                border-color: @note-btn-border-color;
+                outline: none;
+                appearance: none;
+                box-shadow: 0 1px 0 rgba(27, 31, 35, .04), inset 0 1px 0 hsla(0, 0%, 100%, 0.25);
+                transition: background-color .2s cubic-bezier(.3, 0, .5, 1);
+                -webkit-transition: background-color .2s cubic-bezier(.3, 0, .5, 1);
+                &:active {
+                    // background-color: @note-btn-background-active-color;
+                    box-shadow: inset 0 1px 0 rgba(225, 228, 232, .2);
+                    transition: none;
+                }
+                &:hover {
+                    background-color: @note-btn-danger-hover-background-color;
+                    color: @color-white;
+                }
+            }
+            .note-operate {
+                cursor: pointer;
+                display: inline-block;
+                padding: 5px 16px;
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 20px;
+                white-space: nowrap;
+                vertical-align: middle;
+                background-color: @note-btn-background-color;
+                border: 1px solid;
+                border-radius: 6px;
+                border-color: @note-btn-border-color;
+                outline: none;
+                appearance: none;
+                box-shadow: 0 1px 0 rgba(27, 31, 35, .04), inset 0 1px 0 hsla(0, 0%, 100%, 0.25);
+                transition: background-color .2s cubic-bezier(.3, 0, .5, 1);
+                -webkit-transition: background-color .2s cubic-bezier(.3, 0, .5, 1);
+                &:active {
+                    background-color: @note-btn-background-active-color !important;
+                    box-shadow: inset 0 1px 0 rgba(225, 228, 232, .2);
+                    transition: none;
+                }
+                &:hover {
+                    background-color: @note-btn-background-hover-color;
                 }
             }
         }
@@ -97,6 +157,13 @@
                 }
                 p {
                     font-size: 11pt;
+                }
+                .note-operate-check {
+                    float: right;
+                    margin-top: 1px;
+                    margin-bottom: 0;
+                    margin-right: 40px;
+                    display: none;
                 }
                 // .note-remove {
                 //     width: 15px;
@@ -119,6 +186,10 @@
             }
             &:hover {
                 overflow-y: scroll;
+
+                .note-operate-check {
+                    margin-right: 37px;
+                }
             }
             *::selection {
                 background-color: @note-select-color;

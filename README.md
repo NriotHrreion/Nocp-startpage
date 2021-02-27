@@ -1,17 +1,18 @@
 # Nocp Startpage
 
-更简洁的Chomre新标签页
+> 更简洁的Chomre新标签页
+
+By NriotHrreion
 
 ## 下载
 
 下载途径:
-- [国内下载](https://tool.misakal.xyz/crx/startpage1.0.13.7.crx)
-- [海外下载](https://github.com/NriotHrreion/Nocp-startpage/releases)
-- [旧版本下载](https://github.com/NriotHrreion/tools/releases)
+- [下载](https://github.com/NriotHrreion/Nocp-startpage/releases)
+- [旧版下载](https://github.com/NriotHrreion/tools/releases)
 
 ## 预览
 
-[查看Demo](https://nriothrreion.github.io/Nocp-startpage/demo/nstart.html)
+<!-- [查看Demo]() -->
 
 ![预览](./preview.png)
 

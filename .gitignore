@@ -1,2 +1,6 @@
+/node_modules/
 /lib/t.js
 /preview_webstore.png
+/icon_webstore.png
+/package.json
+/package-lock.json

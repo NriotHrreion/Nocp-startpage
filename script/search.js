@@ -9,12 +9,32 @@
  * @license Apache-2.0
  */
 
+/// <reference types="chrome">
+
 /**
  * Background Page Window Object
  * 
  * @type {Window}
  */
 var background = chrome.extension.getBackgroundPage();
+
+function isObjEqual(o1, o2) {
+    var props1 = Object.getOwnPropertyNames(o1);
+    var props2 = Object.getOwnPropertyNames(o2);
+
+    if(props1.length != props2.length) {
+        return false;
+    }
+
+    for(var i = 0; i < props1.length; i++) {
+        var propName = props1[i];
+        if(o1[propName] !== o2[propName]) {
+            return false;
+        }
+    }
+
+    return true;
+}
 
 class Main {
     constructor() {
@@ -27,11 +47,15 @@ class Main {
             /** @type {HTMLInputElement} */
             SEARCH: utils.$("s"),
             /** @type {HTMLDivElement} */
-            MORE: utils.$("more-item"),
+            NOTE: utils.$("note-container"),
             /** @type {HTMLInputElement} */
             NOTE_NEWBOX: utils.$("n-write"),
             /** @type {HTMLButtonElement} */
             NOTE_NEWSUB: utils.$("n-submit"),
+            /** @type {HTMLButtonElement} */
+            NOTE_DELETE: utils.$("n-delete"),
+            /** @type {HTMLButtonElement} */
+            NOTE_OPERATE: utils.$("n-operate"),
             /** @type {HTMLDivElement} */
             NOTE_BODY: utils.$("n-body"),
             /** @type {HTMLImageElement} */
@@ -43,7 +67,9 @@ class Main {
             /** @type {HTMLDivElement} */
             APPS_BODY: utils.$("app-body"),
             /** @type {HTMLDivElement} */
-            APPS_BACK: utils.$("app-backhome")
+            APPS_BACK: utils.$("app-backhome"),
+            /** @type {HTMLImageElement} */
+            IMAGE_INFO: utils.$("image-info")
         };
 
         this.engine = "";
@@ -52,7 +78,6 @@ class Main {
 
         this.init();
         this.initLocale();
-        // preload("https://api.misakal.xyz/Bing-Image");
         this.initPage();
     }
 
@@ -109,6 +134,8 @@ class Main {
         utils.$("n-tit").innerHTML = utils.locale("note");
         utils.$("n-write").placeholder = utils.locale("note_newbox");
         utils.$("n-submit").innerHTML = utils.locale("note_newsub");
+        utils.$("n-delete").innerHTML = utils.locale("note_delete");
+        utils.$("n-operate").innerHTML = utils.locale("note_operate_open");
         utils.$("s").title = utils.locale("title_1");
         utils.$("voice-s").title = utils.locale("voice_search");
         utils.$("a-tit").innerHTML = utils.locale("apps");
@@ -122,8 +149,12 @@ class Main {
 
         chrome.storage.local.get({bgimg: false, imgurl: "image/bg.jpg"}, (data) => {
             if(data.bgimg) {
-                utils.getBingImage((url) => { // fetch Bing image
-                    this.elements.BACKGROUND.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)), url("+ url +")";
+                this.elements.IMAGE_INFO.style.display = "block";
+
+                utils.getBingImage((data) => { // fetch Bing image
+                    this.elements.BACKGROUND.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25)), url("+ data.url +")";
+                    this.elements.IMAGE_INFO.parentElement.title = data.cr;
+                    this.elements.IMAGE_INFO.parentElement.href = data.link;
                 });
             } else if(!data.bgimg) {
                 var bgstyle = 
@@ -225,7 +256,7 @@ class Main {
                                     break;
                             }
                         });
-                    } else if(content.indexOf("/") == 0) {
+                    } else if(content.indexOf("/") == 0) { // command
                         var command = content.replace("/", "");
                         command = command.split(" ");
                         switch(command[0]) {
@@ -271,9 +302,7 @@ class Main {
                                 location.href = command[1] +"://";
                                 break;
                             case "about":
-                                utils.manifest(function(manifest) {
-                                    alert("Name: "+ utils.locale("name") +"\nVersion: "+ manifest.version +"\nAuthor: "+ manifest.author);
-                                });
+                                alert("Name: "+ utils.locale("name") +"\nVersion: "+ utils.manifest.version +"\nAuthor: "+ utils.manifest.author);
                                 break;
                             default:
                                 alert("Unknow command, type /help for help.");
@@ -293,14 +322,15 @@ class Main {
 
     noteBoxSet() {
         var isScroll = false;
+        var isOperating = false;
 
         utils.$("more").onclick = () => {
             if(this.moreBoxStat == 0) {
-                this.elements.MORE.style.width = "310px";
+                this.elements.NOTE.style.width = "375px"; // 310px
                 this.elements.NOTE_NEWBOX.focus();
                 this.moreBoxStat = 1;
             } else if(this.moreBoxStat == 1) {
-                this.elements.MORE.style.width = "0";
+                this.elements.NOTE.style.width = "0";
                 this.moreBoxStat = 0;
             }
         };
@@ -318,6 +348,79 @@ class Main {
     
                     chrome.storage.local.set({notes: note});
                 });
+            }
+        };
+        this.elements.NOTE_DELETE.onclick = () => {
+            var checkboxes = document.getElementsByClassName("note-operate-check");
+            var delete_list = [];
+            var note = [];
+
+            function indexOf(arr, val) {
+                for(var i = 0; i < arr.length; i++) {
+                    if(arr[i] == val) {
+                        return i;
+                    }
+                }
+                return -1;
+            }
+            function remove(arr, item) {
+                var index = indexOf(arr, item);
+                if(index > -1) {
+                    arr.splice(index, 1);
+                }
+
+                return arr;
+            }
+
+            chrome.storage.local.get({notes: []}, (data) => {note = data.notes});
+
+            setTimeout(() => {
+                for(let i = 0; i < checkboxes.length; i++) {
+                    if(checkboxes[i].checked) {
+                        delete_list.push(note[i]);
+                    }
+                }
+    
+                for(let value of delete_list) {
+                    note = remove(note, value)
+                }
+    
+                chrome.storage.local.set({notes: note});
+    
+                isOperating = false;
+                for(let i = 0; i < checkboxes.length; i++) {
+                    checkboxes[i].style.display = "none";
+                    checkboxes[i].checked = false;
+                    this.elements.NOTE_NEWSUB.style.display = "inline-block";
+                    this.elements.NOTE_DELETE.style.display = "none";
+                    this.elements.NOTE_NEWBOX.disabled = false;
+                }
+            }, 50);
+        };
+        this.elements.NOTE_OPERATE.onclick = () => {
+            var checkboxes = document.getElementsByClassName("note-operate-check");
+
+            if(!isOperating) { // open operating mode
+                isOperating = true;
+
+                for(let i = 0; i < checkboxes.length; i++) {
+                    checkboxes[i].style.display = "block";
+                    this.elements.NOTE_NEWSUB.style.display = "none";
+                    this.elements.NOTE_DELETE.style.display = "inline-block";
+                    this.elements.NOTE_NEWBOX.disabled = true;
+                    this.elements.NOTE_OPERATE.innerText = utils.locale("note_operate_cancel");
+                }
+            } else { // close operating mode
+                isOperating = false;
+
+                for(let i = 0; i < checkboxes.length; i++) {
+                    checkboxes[i].style.display = "none";
+                    checkboxes[i].checked = false;
+                    this.elements.NOTE_NEWSUB.style.display = "inline-block";
+                    this.elements.NOTE_DELETE.style.display = "none";
+                    this.elements.NOTE_NEWBOX.disabled = false;
+                    this.elements.NOTE_OPERATE.innerText = utils.locale("note_operate_open");
+                }
             }
         };
         this.listNotes();
@@ -398,15 +501,21 @@ class Main {
                 var time = note[i].time;
                 var content = note[i].content;
 
-                var card = utils.$new("div");
-                card.className = "note-card";
-                var timeform = utils.$new("span");
-                timeform.innerHTML = time;
-                card.appendChild(timeform);
-                var main = utils.$new("p");
-                main.innerHTML = content;
-                card.appendChild(main);
-                this.elements.NOTE_BODY.appendChild(card);
+                if(time != undefined && content != undefined) {
+                    var card = utils.$new("div");
+                    card.className = "note-card";
+                    var operate_btn = utils.$new("input");
+                    operate_btn.type = "checkbox";
+                    operate_btn.className = "note-operate-check";
+                    card.appendChild(operate_btn);
+                    var timeform = utils.$new("span");
+                    timeform.innerHTML = time;
+                    card.appendChild(timeform);
+                    var main = utils.$new("p");
+                    main.innerHTML = content;
+                    card.appendChild(main);
+                    this.elements.NOTE_BODY.appendChild(card);
+                }
             }
         });
     }
@@ -450,7 +559,7 @@ class Main {
 
                     j++;
 
-                    if(j % 6 == 0 && j != 0) {
+                    if(j % 7 == 0 && j != 0) {
                         this.elements.APPS_BODY.appendChild(utils.$new("br"));
                     }
                 }

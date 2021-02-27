@@ -1,3 +1,5 @@
+/// <reference types="chrome">
+
 var url = window.location.search;
 
 if(url != "" && navigator.onLine) {

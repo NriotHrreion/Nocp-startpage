@@ -1,3 +1,5 @@
+/// <reference types="chrome">
+
 var uploader = document.getElementById("uploader");
 uploader.onchange = function() {
     var file = uploader.files[0];

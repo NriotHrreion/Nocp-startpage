@@ -1,3 +1,5 @@
+/// <reference types="chrome">
+
 var list = document.getElementById("history-list");
 var searchbox = document.getElementById("sbox");
 var search = document.getElementById("s");

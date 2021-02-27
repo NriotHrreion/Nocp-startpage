@@ -9,6 +9,8 @@
  * @license Apache-2.0
  */
 
+/// <reference types="chrome">
+
 console.log("%cCopyright (c) NriotHrreion 2020", "color: darkred");
 
 chrome.browserAction.setBadgeText({text: "off"});
@@ -72,23 +74,39 @@ chrome.tabs.onUpdated.addListener(function(id, info, tab) {
             icon: tab.favIconUrl
         };
         var check = true;
+        var flag = false;
 
-        if(result.icon == "" || result.icon == undefined) {
-            check = false;
-        }
+        chrome.bookmarks.getTree(function(tree) {
+            var bookmark = tree[0]["children"][0]["children"];
 
-        for(let i in favicons) {
-            if(isObjEqual(favicons[i], result)) {
+            for(let i in bookmark) {
+                if(bookmark[i].url == result.url) {
+                    flag = true;
+                }
+            }
+        });
+
+        setTimeout(() => {
+            if(result.url == "chrome://newtab/") {
                 check = false;
             }
-        }
-
-        if(check) {
-            favicons[favicons.length] = result;
-            chrome.storage.local.set({favicons: favicons});
-        }
+    
+            if(result.icon == "" || result.icon == undefined) {
+                check = false;
+            }
+    
+            for(let i in favicons) {
+                if(isObjEqual(favicons[i], result)) {
+                    check = false;
+                }
+            }
+    
+            if(check && flag) {
+                favicons[favicons.length] = result;
+                chrome.storage.local.set({favicons: favicons});
+            }
+        }, 50);
     });
 });
 
-new CustomEvent("startpage-by-nriothrreion", {});
-document.addEventListener("startpage-by-nriothrreion", function() {});
+utils.copy();

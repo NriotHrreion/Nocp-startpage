@@ -9,6 +9,7 @@
     <meta name="application-name" content="Nocp Startpage">
     <script type="text/javascript" src="util/console.js"></script>
     <script type="text/javascript" src="util/preload.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="image/favicon_default.svg">
     <link rel="prefetch" href="./image/bg.jpg" as="image">
     <link rel="stylesheet/less" type="text/css" href="css/page.less">
     <script type="text/javascript" src="lib/less-config.js"></script>
@@ -22,17 +23,20 @@
     <div class="background" aria-hidden="true"></div>
     <!-- more -->
     <div class="morebox">
-        <img src="image/more.png" width="30px" height="30px" id="apps" class="applications">
-        <a href="https://myaccount.google.com"><img src="image/account.png" width="35px" height="35px" id="account" class="account"></a>
-        <img src="image/note.svg" width="30px" height="30px" id="more" class="more">
+        <img src="image/more.png" id="apps" class="applications">
+        <a href="about:blank"><img src="image/info.svg" id="image-info" class="image-info"></a>
+        <a href="https://myaccount.google.com"><img src="image/account.png" id="account" class="account"></a>
+        <img src="image/note.svg" id="more" class="more">
         <!-- notes -->
-        <div class="more-item" id="more-item">
+        <div class="notes" id="note-container">
             <p id="n-tit"></p>
-            <div class="note" aria-hidden="true">
+            <div class="note-main" aria-hidden="true">
                 <!-- new note -->
                 <div class="note-write">
                     <input type="text" class="note-new" id="n-write" autocomplete="off">
                     <button class="note-submit" id="n-submit"></button>
+                    <button class="note-delete" id="n-delete"></button>
+                    <button class="note-operate" id="n-operate"></button>
                 </div>
                 <!-- note content -->
                 <div class="note-body" id="n-body"></div>

@@ -1,4 +1,7 @@
+/// <reference types="chrome">
+
 (function(window) {
+
     window.utils = {
         _: function(){},
         $: function(type, elem) {
@@ -32,22 +35,28 @@
         global: function(variable, varName) {
             window[varName] = variable;
         },
-        manifest: function(callback) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("get", "../manifest.json");
-            xhr.send(null);
-            xhr.onload = function() {
-                callback(JSON.parse(this.responseText));
-            };
-        },
         getBingImage: function(callback) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("get", "https://cn.bing.com/HPImageArchive.aspx?format=js&idx=$daysAgo&n=1");
-            xhr.send(null);
-            xhr.onload = function() {
+            var xhrBing = new XMLHttpRequest();
+            var url = chrome.i18n.getUILanguage() == "en" ? "https://bing.com/HPImageArchive.aspx?format=js&idx=$daysAgo&n=1" : "https://cn.bing.com/HPImageArchive.aspx?format=js&idx=$daysAgo&n=1";
+
+            xhrBing.open("get", url);
+            xhrBing.send(null);
+            xhrBing.onload = function(e) {
                 var data = JSON.parse(this.responseText);
-                callback("https://cn.bing.com"+ data.images[0].url);
+                callback({
+                    url: "https://cn.bing.com"+ data.images[0].url,
+                    cr: data.images[0].copyright,
+                    link: data.images[0].copyrightlink
+                });
             };
         }
     };
+
+    var xhrManifest = new XMLHttpRequest();
+    xhrManifest.open("get", "../manifest.json");
+    xhrManifest.send(null);
+    xhrManifest.onload = function() {
+        window.utils.manifest = JSON.parse(this.responseText);
+    };
+
 })(window);

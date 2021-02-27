@@ -1,3 +1,5 @@
+/// <reference types="chrome">
+
 class Init {
     constructor() {
         this.firstTime();

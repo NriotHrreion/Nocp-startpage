@@ -9,6 +9,8 @@
  * @license Apache-2.0
  */
 
+/// <reference types="chrome">
+
 class Popup {
     constructor() {
         this.inputs = [
