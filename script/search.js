@@ -394,6 +394,7 @@ class Main {
                     this.elements.NOTE_NEWSUB.style.display = "inline-block";
                     this.elements.NOTE_DELETE.style.display = "none";
                     this.elements.NOTE_NEWBOX.disabled = false;
+                    this.elements.NOTE_OPERATE.innerText = utils.locale("note_operate_open");
                 }
             }, 50);
         };
