@@ -1,5 +1,7 @@
 # Nocp Startpage
 
+## `This Repo Has Been Archived`
+
 > 更简洁的Chomre新标签页
 
 By NriotHrreion
